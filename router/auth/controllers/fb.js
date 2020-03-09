@@ -13,16 +13,16 @@ module.exports = (req, res) => {
                     if (!result.fbID) {
                         // console.log(result.fbID);
                         
-                        db.Users.updateOne({_id: result._id}, {$set: {fbID: id}}).exec((error, resultat) => {
+                        db.Users.updateOne({_id: result._id}, {$set: {fbID: id, name}}).exec((error, resultat) => {
                             if (error) return res.status(500)
-                            console.log("Resultat1.8: ", resultat);
+                            console.log("Resultat1.18: ", resultat);
                             const token = jwt.sign({fbID: id, _id: result._id}, privatKey) 
-                            return res.send({msg: `Welcome ${name}`, status: 'success', user: {...result, fbID: id}})  
+                            return res.send({msg: `Welcome ${name}`, status: 'success', user: {...result, fbID: id, name, token}})  
                         })
                     }else{
                         if(result.fbID == id) {
                             console.log("20:", result);
-                            const token = jwt.sign({fbID: id, _id: result._id}, privatKey) 
+                            const token = jwt.sign({fbID: id, _id: result._id, name}, privatKey) 
                             return res.send({msg: `Welcome ${name}`, status: 'success', user: result, token}) 
                              
                         }

@@ -1,5 +1,5 @@
 const ServerConfig = {
-    host: 'localhost',
+    host: '192.168.0.102',
     port: 3013
 }
 const dbConfig = {

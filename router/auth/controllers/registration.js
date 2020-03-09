@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs')
 module.exports = (req, res) => {
+    console.log(req.body);
     let email = req.body.email.toLowerCase()
     let password = req.body.password.toString()
     db.Users.findOne({email}).exec((er, re) => {
