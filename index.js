@@ -3,7 +3,7 @@ const   db              =   require('./db/index')()
 const   cors            =   require('cors')
 const   multer          =   require('./plugins/multer')
 //==== Middleware =====
-// const   verifyToken     =   require('./middleware/verifyToken')
+const   verifyToken     =   require('./middleware/veryify')
 //===== Glogal CFG =====
 global.db       = db
 global.express  = express
@@ -37,6 +37,9 @@ const auth = require('./router/auth')
 //     })
 // })
 app.use('/auth', auth.router)
+app.get('/', verifyToken ,(req, res)=> {
+    res.send("api worked")
+})
 // app.use('/api', verifyToken , api.router)
 // app.use('/store', verifyToken , store.router)
 // app.use('/crm' , crm.router)
