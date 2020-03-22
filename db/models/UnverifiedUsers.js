@@ -1,5 +1,5 @@
 module.exports = (mongoose, connection) =>
-    connection.model('Users', new mongoose.Schema({
+    connection.model('UnUsers', new mongoose.Schema({
         password: {
             type: String,
             required: true
@@ -15,7 +15,7 @@ module.exports = (mongoose, connection) =>
         login: {
             type: String
         },
-        avatar: String,
         name: String,
-        fbID: String
+        fbID: String,
+        key: String
     }))
