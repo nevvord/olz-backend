@@ -6,7 +6,7 @@ const { privatKey } = require('../../../config/index')
 module.exports = (req, res) => {
   const { email, password } = req.body
   db.Users.findOne({email}).exec((error, user) => {
-    if (error) return res.status(500).send({msg: "Server ERROR: Status 500.10, DB ERROR!"})
+    if (error) return res.status(500).send({msg: "Server ERROR: Status 500.9, DB ERROR!"})
     if (!user) return res.status(404).send({msg: "User not found"})
     if (email !== user.email) return res.status(400).send({msg: "Invalid email."})
     bcrypt.compare(password, user.password, (err, passwordMatch) => {

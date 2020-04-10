@@ -12,10 +12,19 @@ module.exports = (mongoose, connection) =>
             type: Date,
             default: Date.now
         },
-        login: {
-            type: String
-        },
+        login: String,
         avatar: String,
         name: String,
-        fbID: String
+        fbID: String,
+        fbToken: String,
+        phoneNumber: String,
+        city: String,
+        business: String,
+        sp: String,
+        about: String,
+        status: String,
+        social: {
+            facebooke: String,
+            instagram: String
+        }
     }))
