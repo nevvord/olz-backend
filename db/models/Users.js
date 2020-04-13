@@ -2,7 +2,7 @@ module.exports = (mongoose, connection) =>
     connection.model('Users', new mongoose.Schema({
         password: {
             type: String,
-            // required: true
+            required: true
         },
         email: {
             type: String,
@@ -12,25 +12,19 @@ module.exports = (mongoose, connection) =>
             type: Date,
             default: Date.now
         },
-        login: {
-            type: String
-        },
+        login: String,
+        avatar: String,
         name: String,
         fbID: String,
-        massage: [{
-            sender: {
-                msg: [{
-                    _id: mongoose.Schema.Types.ObjectId,
-                    date: {
-                        type: Date,
-                        default: Date.now
-                    },
-                    text: String,
-                    read: {
-                        type: Boolean,
-                        default: false
-                    }
-                }]
-            }
-        }]
+        fbToken: String,
+        phoneNumber: String,
+        city: String,
+        business: String,
+        sp: String,
+        about: String,
+        status: String,
+        social: {
+            facebooke: String,
+            instagram: String
+        }
     }))
