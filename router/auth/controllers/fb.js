@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
     const { email, name, avatar, fbID } = req.body
-    let fbToken = req.headers.authorization.split(' ')[1]
+    const fbToken = req.headers.authorization.split(' ')[1]
     db.Users.findOne({email}, (error, user) => {
         if (error) return res.status(500).send({msg: "Ошибка сервера. Возможно кодер x_x"})
         if (!user) return res.status(404).send({msg: "Новый пользователь. Нужен пароль"})

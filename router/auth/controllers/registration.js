@@ -19,7 +19,13 @@ module.exports = (req, res) => {
                     if (error) return res.status(500).send({msg: 'Ошибка сервера. Возможно кодер x_x(', error})
                     db.UnUsers.create({...req.body, password: hash, key: keyForVerify}, error => {
                         if (error)  return res.status(500).send({e})
-                        // sender(email, link)
+                        sender(email, link)
+                        .then(response => {
+                            console.log("Response: ", response)
+                        })
+                        .catch(error => {
+                            console.error(error)
+                        })
                         res.send({ msg: `Рады вас видеть ${name}, проверьти почту для верефикации! `})
                     })
                 })

@@ -17,8 +17,8 @@ const { ServerConfig } = require('./config/')
 const app = express()
 
 //===== APP USE =====
-app.use(express.static('uploads'))
 app.use(express.static('static'))
+app.use(express.static('uploads'))
 app.use(express.json())
 app.use(cors({
     credentials: true,

@@ -23,8 +23,9 @@ module.exports = (mongoose, connection) =>
         sp: String,
         about: String,
         status: String,
+        dateBirthday: Date,
         social: {
-            facebooke: String,
-            instagram: String
+            facebook: {type: String, default: ''},
+            instagram: {type: String, default: ''}
         }
     }))
