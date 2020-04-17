@@ -19,11 +19,11 @@ module.exports = (mongoose, connection) =>
         fbToken: String,
         phoneNumber: String,
         city: String,
-        business: String,
+        business: Number, // 1 - Частное лицо, 2 - Юридическое лицо
         sp: String,
         about: String,
         status: String,
-        dateBirthday: Date,
+        dateBirthday: String,
         social: {
             facebook: {type: String, default: ''},
             instagram: {type: String, default: ''}
