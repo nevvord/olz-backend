@@ -1,5 +1,5 @@
 const router = express.Router()
-const verify = require('../../middleware/veryify')
+const middleware = require('../../middleware')
 
 const putStatus = require('./controllers/profile/put/status')
 const putAvatar = require('./controllers/profile/put/avatar')
@@ -9,10 +9,10 @@ const getUserWithId = require('./controllers/profile/get/user')
 
 router
     .get('/profile/get/:id', getUserWithId)
-    .use(verify)
+    .use(middleware.verify.Deafault)
     .put('/profile/change/status', putStatus)
     .put('/profile/change/info', putInfo)
-    .put('/profile/change/avatar', multer.single('image'), putAvatar)
+    .put('/profile/change/avatar', middleware.Multer.single('image'), putAvatar)
     .get('/get/defaultavatars', getDeafaultAvatars)
 
 

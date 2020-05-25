@@ -1,17 +1,14 @@
 const   express         =   require('express')
 const   db              =   require('./db/index')()
 const   cors            =   require('cors')
-const   multer          =   require('./plugins/multer')
+const   multer          =   require('./middleware/FilePlugins/Multer')
 
-//==== Middleware =====
-const   verifyToken     =   require('./middleware/veryify')
 //===== Glogal CFG =====
 global.db       = db
 global.express  = express
-global.multer   = multer
 
-//===== Config sets =====
-const { ServerConfig } = require('./config/')
+//===== Configs =====
+require('dotenv').config()
 
 //===== Set up express APP =====
 const app = express()
@@ -25,17 +22,21 @@ app.use(cors({
     origin: true,
     optionsSuccessStatus: 200
 }))
-// app.use(cookieparser())
 
 //===== Routes =====
 const auth = require('./router/auth')
 const users = require('./router/users')
+const publication = require('./router/publications')
+const superAdmin = require('./router/SuperAdmin')
+
 
 app.get('/', (req, res)=> {
     res.send("OLZ API! Welcome!")
 })
+app.use('/sa/', superAdmin.router)
 app.use('/auth', auth.router)
 app.use('/user', users.router)
+app.use('/publications', publication.router)
 
 //==== Listen Requests =====
-app.listen(ServerConfig.port, () => console.log(`Server has been running in ${ServerConfig.host}:${ServerConfig.port}`))
+app.listen(process.env.SERVER_PORT, () => console.log(`Server has been running in ${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`))

@@ -1,18 +1,10 @@
+require('dotenv').config()
 const ServerConfig = {
-    host: 'localhost',
-    port: 3013
+    host: process.env.SERVER_HOST,
+    port: process.env.SERVER_PORT
 }
 const fullPath = `http://${ServerConfig.host}:${ServerConfig.port}`
-
-const dbConfig = {
-    host: '127.0.0.1:27017',
-    name: 'olz-test'
-}
-const privatKey = "wwhhyyttggffrriiookkmmnnhh44yyuuee88eeooiweep"
-
 module.exports = {
     ServerConfig,
-    dbConfig,
-    privatKey,
     fullPath
 }

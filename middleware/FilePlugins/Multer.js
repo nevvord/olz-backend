@@ -2,10 +2,10 @@
 const multer = require('multer')
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpg' || 'image/png' || 'image/jpeg') {
-        cb(null, true);
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG)$/)) {
+        return cb(null, false);
     }
-    cb(null, false);
+    cb(null, true);
 }
 
 const storage = multer.diskStorage({
@@ -13,13 +13,14 @@ const storage = multer.diskStorage({
         cb(null, './uploads');
     },
     filename: (req, file, cb) => {
-        cb(null, req.userID + new Date().valueOf() + '.' +file.mimetype.split('/')[1]);
+        cb(null, `u${req.userID}_d${new Date().valueOf()}.${file.mimetype.split('/')[1]}`)
     }
 })
 
 const upload = multer({
     storage: storage,
     limits: {
+        files: 20,
         fileSize: 1920 * 1080 * 2
     },
     fileFilter: fileFilter

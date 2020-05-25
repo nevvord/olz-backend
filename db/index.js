@@ -1,13 +1,15 @@
 const   mongoose        =   require('mongoose')
 //===== Config =====
-const   { dbConfig }    =   require('../config/index')
+require('dotenv').config()
 //===== DB =====
-const   connection      =   mongoose.createConnection(`mongodb://${dbConfig.host}/${dbConfig.name}`, {useNewUrlParser: true, useUnifiedTopology: true})
+const   connectionPath      =   `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`
+const   connectionOptions   =   {useNewUrlParser: true, useUnifiedTopology: true}
+const   connection          =   mongoose.createConnection(connectionPath, connectionOptions)
 
 //===== Connections =====
-connection.on('connected',      ()      => { console.log(`Mongoose conected to ${dbConfig.name} db`)})
-connection.on('error',          (err)   => { console.log(`Mongoose not conected to ${dbConfig.name} db: `, err)})
-connection.on('disconnected',   ()      => { console.log(`Mongoose disconected with ${dbConfig.name} db`)})
+connection.on('connected',      ()      => { console.log(`Mongoose conected to ${process.env.DB_NAME} db`)})
+connection.on('error',          (err)   => { console.log(`Mongoose not conected to ${process.env.DB_NAME} db: `, err)})
+connection.on('disconnected',   ()      => { console.log(`Mongoose disconected with ${process.env.DB_NAME} db`)})
 
 //===== Module exports =====
 module.exports = () => {
@@ -15,10 +17,11 @@ module.exports = () => {
     //===== Return models =====
     return{
         connection,
-        Users : require('./models/Users.js')(mongoose, connection),
-        UnUsers : require('./models/UnverifiedUsers.js')(mongoose, connection),
-        // CreateStores : require('./models/createStores')(mongoose, connection),
-        // UpWorks : require('./models/upWorks')(mongoose, connection),
-        // Admins: require('./models/Admin')(mongoose, connection)
+        Users: require('./models/Users')(mongoose, connection),
+        UnUsers: require('./models/UnverifiedUsers')(mongoose, connection),
+        Categories: require('./models/Categories')(mongoose, connection),
+        SubCategories: require('./models/SubCategories')(mongoose, connection),
+        Publications: require('./models/Publications')(mongoose, connection),
+        Images: require('./models/Images')(mongoose, connection)
     }
 }
