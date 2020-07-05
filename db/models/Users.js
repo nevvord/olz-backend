@@ -5,7 +5,7 @@ module.exports = (mongoose, connection) =>
         date: { type: Date, default: Date.now },
         login: { type: String, maxLength: 40 },
         avatar: {
-            link: String,
+            link: {type: String, default: 'images/avatars/avraam.jpg'},
             file: {type: mongoose.Schema.Types.ObjectId, ref: 'Images'}
         },
         name: {type: String, maxLength: 40},

@@ -9,10 +9,10 @@ module.exports = (mongoose, connection) =>
       price: Number,
       type: String, //USD, EUR, UAN
       bargain: Boolean,
-      exchange: Boolean,
       date: {type: Date, default: Date.now}
     })],
     characteristics: [],
+    adress: String,
     category: {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'Categories', 
@@ -27,5 +27,8 @@ module.exports = (mongoose, connection) =>
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'Users', 
       required: true
-    }
+    },
+    phoneNumbers: Array,
+    phoneNumbersShow: Boolean,
+    confirmed: {type: Boolean, default: false}
   }))

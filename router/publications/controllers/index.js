@@ -6,5 +6,7 @@ module.exports = {
   getCategoriesForAddPublications,
   getCategoriesForMainPage, 
   addPublicationImages,
-  addPublication
+  addPublication,
+  getUserPublications: require('./get/getUserPublications'),
+  getOnePublication: require('./get/getOnePublication')
 }
